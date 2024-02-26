@@ -16,8 +16,8 @@ import com.fhce.unidad.model.unidadModel;
 @RestController
 @RequestMapping("fhce-egovf-uni/unidad")
 //@RequestMapping("unidad")
-//@CrossOrigin("http://172.16.114.144:8081/")
-@CrossOrigin("http://192.168.31.45:8081/")
+//@CrossOrigin("https://svfhce.umsa.bo/")
+@CrossOrigin("http://192.168.31.45:8080/")
 public class unidadController {
 	
 	@Autowired
