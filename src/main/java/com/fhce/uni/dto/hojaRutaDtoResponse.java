@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class unidadDtoResponse {
+public class hojaRutaDtoResponse {
     private Long id;
-    private String unidad;
-    private String dependiente;
-    private String sigla;
-    private String telefono;
-    private String correo;
+    private String cite;
+    private Long id_nota;
+    private String fecha_creacion;
+    private String estado;
+    private int gestion;
 }

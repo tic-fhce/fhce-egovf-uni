@@ -10,28 +10,25 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="pertenece")
-public class perteneceModel {
+@Table(name="hoja_ruta")
+public class hojaRutaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique=true, nullable = false)
     private Long id;
     
-    @Column(name="_01id_unidad")
-    private Long id_unidad;
+    @Column(name="_01cite")
+    private String cite;
     
-    @Column(name="_02id_usuario")
-    private Long id_usuario; 
+    @Column(name="_02id_nota")
+    private Long id_nota;
     
-    @Column(name="_03fecha")
-    private String fecha;
+    @Column(name="_03fecha_creacion")
+    private String fecha_creacion;
     
     @Column(name="_04estado")
-    private boolean estado;
+    private String estado;
     
     @Column(name="_05gestion")
     private int gestion;
-    
-    @Column(name="_06rol")
-    private String rol;
 }

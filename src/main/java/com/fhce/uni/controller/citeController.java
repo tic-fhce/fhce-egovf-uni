@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fhce.uni.dto.perteneceDtoRequest;
-import com.fhce.uni.dto.perteneceDtoResponse;
-import com.fhce.uni.service.perteneceService;
+import com.fhce.uni.dto.citeDtoRequest;
+import com.fhce.uni.dto.citeDtoResponse;
+import com.fhce.uni.service.citeService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/fhce-egovf-uni/pertenece")
+@RequestMapping("/fhce-egovf-uni/cite")
 @RequiredArgsConstructor
-public class perteneceController {
+public class citeController {
     
-    private final perteneceService perteneceService;
+    private final citeService citeService;
     
-    @GetMapping("/getPerteneces")
-    public ResponseEntity<List<perteneceDtoResponse>> getPerteneces() {
+    @GetMapping("/getCites")
+    public ResponseEntity<List<citeDtoResponse>> getCites() {
         try {
-            return new ResponseEntity<>(this.perteneceService.getPerteneces(), HttpStatus.OK);
+            return new ResponseEntity<>(this.citeService.getCites(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
-    @PostMapping("/addPertenece")
-    public ResponseEntity<perteneceDtoResponse> addPertenece(@RequestBody perteneceDtoRequest perteneceDtoRequest) {
+    @PostMapping("/addCite")
+    public ResponseEntity<citeDtoResponse> addCite(@RequestBody citeDtoRequest citeDtoRequest) {
         try {
-            return new ResponseEntity<>(this.perteneceService.addPertenece(perteneceDtoRequest), HttpStatus.CREATED);
+            return new ResponseEntity<>(this.citeService.addCite(citeDtoRequest), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

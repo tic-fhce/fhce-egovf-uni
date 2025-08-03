@@ -10,28 +10,28 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="pertenece")
-public class perteneceModel {
+@Table(name="usuario")
+public class usuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique=true, nullable = false)
     private Long id;
     
-    @Column(name="_01id_unidad")
-    private Long id_unidad;
+    @Column(name="_01nombre")
+    private String nombre;
     
-    @Column(name="_02id_usuario")
-    private Long id_usuario; 
+    @Column(name="_02password")
+    private String password;
     
-    @Column(name="_03fecha")
-    private String fecha;
+    @Column(name="_03cif", unique=true)
+    private int cif;
     
-    @Column(name="_04estado")
-    private boolean estado;
+    @Column(name="_04email")
+    private String email;
     
-    @Column(name="_05gestion")
-    private int gestion;
+    @Column(name="_05telefono")
+    private String telefono;
     
-    @Column(name="_06rol")
-    private String rol;
+    @Column(name="_06activo")
+    private boolean activo;
 }

@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fhce.uni.dto.perteneceDtoRequest;
-import com.fhce.uni.dto.perteneceDtoResponse;
-import com.fhce.uni.service.perteneceService;
+import com.fhce.uni.dto.hojaRutaDtoRequest;
+import com.fhce.uni.dto.hojaRutaDtoResponse;
+import com.fhce.uni.service.hojaRutaService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/fhce-egovf-uni/pertenece")
+@RequestMapping("/fhce-egovf-uni/hoja-ruta")
 @RequiredArgsConstructor
-public class perteneceController {
+public class hojaRutaController {
     
-    private final perteneceService perteneceService;
+    private final hojaRutaService hojaRutaService;
     
-    @GetMapping("/getPerteneces")
-    public ResponseEntity<List<perteneceDtoResponse>> getPerteneces() {
+    @GetMapping("/getHojasRuta")
+    public ResponseEntity<List<hojaRutaDtoResponse>> getHojasRuta() {
         try {
-            return new ResponseEntity<>(this.perteneceService.getPerteneces(), HttpStatus.OK);
+            return new ResponseEntity<>(this.hojaRutaService.getHojasRuta(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
-    @PostMapping("/addPertenece")
-    public ResponseEntity<perteneceDtoResponse> addPertenece(@RequestBody perteneceDtoRequest perteneceDtoRequest) {
+    @PostMapping("/addHojaRuta")
+    public ResponseEntity<hojaRutaDtoResponse> addHojaRuta(@RequestBody hojaRutaDtoRequest hojaRutaDtoRequest) {
         try {
-            return new ResponseEntity<>(this.perteneceService.addPertenece(perteneceDtoRequest), HttpStatus.CREATED);
+            return new ResponseEntity<>(this.hojaRutaService.addHojaRuta(hojaRutaDtoRequest), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

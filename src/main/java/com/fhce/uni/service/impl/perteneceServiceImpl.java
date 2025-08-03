@@ -17,30 +17,25 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class perteneceServiceImpl implements perteneceService{
-	
-	private final perteneceDao perteneceDao;
-	private final ModelMapper modelMapper;
-	
-	@Transactional
-	public List<perteneceDtoResponse>listar(){
-		List<perteneceDtoResponse> pertenece = this.perteneceDao.findAll().stream()
-				.map(per->this.modelMapper.map(per, perteneceDtoResponse.class))
-				.collect(Collectors.toList());
-		return (pertenece);
-	}
-	
-	@Transactional
-	public perteneceDtoResponse addPertenece(perteneceDtoRequest perteneceDtoRequest) {
-		perteneceModel perteneceModel = new perteneceModel();
-		perteneceModel.setCif(perteneceDtoRequest.getCif());
-		perteneceModel.setEstado(true);
-		perteneceModel.setFecha(perteneceDtoRequest.getFecha());
-		perteneceModel.setId_unidad(perteneceDtoRequest.getId_unidad());
-		perteneceModel.setGestion(perteneceDtoRequest.getGestion());
-		this.perteneceDao.save(perteneceModel);
-		return (this.modelMapper.map(perteneceModel, perteneceDtoResponse.class));
-	}
-	
-	
+public class perteneceServiceImpl implements perteneceService {
+    
+    private final perteneceDao perteneceDao;
+    private final ModelMapper modelMapper;
+    
+    @Override
+    @Transactional
+    public List<perteneceDtoResponse> getPerteneces() {
+        return this.perteneceDao.findAll().stream()
+                .map(pertenece -> this.modelMapper.map(pertenece, perteneceDtoResponse.class))
+                .collect(Collectors.toList());
+    }
+    
+    @Override
+    @Transactional
+    public perteneceDtoResponse addPertenece(perteneceDtoRequest perteneceDtoRequest) {
+        perteneceModel perteneceModel = this.modelMapper.map(perteneceDtoRequest, perteneceModel.class);
+        perteneceModel.setEstado(true); // Por defecto activo al crear
+        this.perteneceDao.save(perteneceModel);
+        return this.modelMapper.map(perteneceModel, perteneceDtoResponse.class);
+    }
 }

@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fhce.uni.dto.perteneceDtoRequest;
-import com.fhce.uni.dto.perteneceDtoResponse;
-import com.fhce.uni.service.perteneceService;
+import com.fhce.uni.dto.usuarioDtoRequest;
+import com.fhce.uni.dto.usuarioDtoResponse;
+import com.fhce.uni.service.usuarioService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/fhce-egovf-uni/pertenece")
+@RequestMapping("/fhce-egovf-uni/usuario")
 @RequiredArgsConstructor
-public class perteneceController {
+public class usuarioController {
     
-    private final perteneceService perteneceService;
+    private final usuarioService usuarioService;
     
-    @GetMapping("/getPerteneces")
-    public ResponseEntity<List<perteneceDtoResponse>> getPerteneces() {
+    @GetMapping("/getUsuarios")
+    public ResponseEntity<List<usuarioDtoResponse>> getUsuarios() {
         try {
-            return new ResponseEntity<>(this.perteneceService.getPerteneces(), HttpStatus.OK);
+            return new ResponseEntity<>(this.usuarioService.getUsuarios(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
-    @PostMapping("/addPertenece")
-    public ResponseEntity<perteneceDtoResponse> addPertenece(@RequestBody perteneceDtoRequest perteneceDtoRequest) {
+    @PostMapping("/addUsuario")
+    public ResponseEntity<usuarioDtoResponse> addUsuario(@RequestBody usuarioDtoRequest usuarioDtoRequest) {
         try {
-            return new ResponseEntity<>(this.perteneceService.addPertenece(perteneceDtoRequest), HttpStatus.CREATED);
+            return new ResponseEntity<>(this.usuarioService.addUsuario(usuarioDtoRequest), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

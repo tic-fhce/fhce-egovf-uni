@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fhce.uni.dto.perteneceDtoRequest;
-import com.fhce.uni.dto.perteneceDtoResponse;
-import com.fhce.uni.service.perteneceService;
+import com.fhce.uni.dto.anexoDtoRequest;
+import com.fhce.uni.dto.anexoDtoResponse;
+import com.fhce.uni.service.anexoService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/fhce-egovf-uni/pertenece")
+@RequestMapping("/fhce-egovf-uni/anexo")
 @RequiredArgsConstructor
-public class perteneceController {
+public class anexoController {
     
-    private final perteneceService perteneceService;
+    private final anexoService anexoService;
     
-    @GetMapping("/getPerteneces")
-    public ResponseEntity<List<perteneceDtoResponse>> getPerteneces() {
+    @GetMapping("/getAnexos")
+    public ResponseEntity<List<anexoDtoResponse>> getAnexos() {
         try {
-            return new ResponseEntity<>(this.perteneceService.getPerteneces(), HttpStatus.OK);
+            return new ResponseEntity<>(this.anexoService.getAnexos(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
-    @PostMapping("/addPertenece")
-    public ResponseEntity<perteneceDtoResponse> addPertenece(@RequestBody perteneceDtoRequest perteneceDtoRequest) {
+    @PostMapping("/addAnexo")
+    public ResponseEntity<anexoDtoResponse> addAnexo(@RequestBody anexoDtoRequest anexoDtoRequest) {
         try {
-            return new ResponseEntity<>(this.perteneceService.addPertenece(perteneceDtoRequest), HttpStatus.CREATED);
+            return new ResponseEntity<>(this.anexoService.addAnexo(anexoDtoRequest), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
