@@ -6,12 +6,12 @@ import io.swagger.v3.oas.annotations.info.Info;
 
 @OpenAPIDefinition(
     info = @Info(
-        title = "API Sistema de Ecommerce FHCE",
-        description = "Documentación oficial de las APIs para el sistema de Ecommerce",
+        title = "API Sistema de fhce-egovf-uni",
+        description = "Documentación oficial de las APIs para el sistema de fhce-egovf-uni",
         version = "1.0",
         contact = @Contact(
-            name = "Tu Nombre o Equipo",
-            email = "tucorreo@fhce.edu.uy"
+            name = "fhce-egovf-uni",
+            email = "utic@fhce.edu.bo"
         )
     )
 )

@@ -6,5 +6,5 @@ import lombok.Data;
 public class flujoEstadoDto {
     private Long id_flujo;
     private Long id_usuario;
-    private String nuevo_estado;  // "RECIBIDO" o "FINALIZADO"
+    private String nuevo_estado;
 }

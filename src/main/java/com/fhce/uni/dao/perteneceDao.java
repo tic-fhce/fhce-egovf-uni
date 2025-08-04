@@ -22,4 +22,14 @@ public interface perteneceDao extends JpaRepository<perteneceModel, Long> {
     
     @Query("SELECT p.id_usuario FROM perteneceModel p WHERE p.id_unidad = :idUnidad AND p.rol = 'SECRETARIO' AND p.estado = true")
     Optional<Long> findSecretarioByUnidadId(@Param("idUnidad") Long idUnidad);
+    
+    @Query("SELECT p FROM perteneceModel p WHERE p.id_unidad = :idUnidad AND p.estado = :estado")
+    List<perteneceModel> findByIdUnidadAndEstado(
+        @Param("idUnidad") Long id_unidad, 
+        @Param("estado") boolean estado);
+    
+    @Query(value = "SELECT * FROM pertenece WHERE _01id_unidad = :idUnidad AND _04estado = :estado", nativeQuery = true)
+    List<perteneceModel> findByIdUnidadAndEstadoNative(
+        @Param("idUnidad") Long id_unidad, 
+        @Param("estado") boolean estado);
 }

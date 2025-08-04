@@ -11,6 +11,7 @@ public class notificacionDtoResponse {
     private Long id;
     private Long id_usuario;
     private Long id_flujo_aprobacion;
+    private Long id_flujo_hoja_ruta;
     private String tipo;
     private String mensaje;
     private String fecha_hora;

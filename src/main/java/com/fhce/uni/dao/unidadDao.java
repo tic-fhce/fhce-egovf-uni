@@ -1,5 +1,6 @@
 package com.fhce.uni.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,7 @@ public interface unidadDao extends JpaRepository<unidadModel, Long> {
     Optional<unidadModel> findBySigla(String sigla);
     
     Optional<unidadModel> findByUnidad(String nombreUnidad);
+    
+    List<unidadModel> findByDependienteIsNull();
+    List<unidadModel> findByDependiente(String nombreUnidad);
 }

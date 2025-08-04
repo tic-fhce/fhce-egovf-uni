@@ -1,5 +1,7 @@
 package com.fhce.uni.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,7 @@ public interface citeDao extends JpaRepository<citeModel, Long> {
     
     @Query("SELECT MAX(c.numeroSecuencial) FROM citeModel c WHERE c.prefijo = :prefijo AND c.gestion = :gestion")
     Integer findUltimoNumeroCite(@Param("prefijo") String prefijo, @Param("gestion") int gestion);
+    
+    List<citeModel> findByIdUnidad(Long id_unidad);
+    
 }

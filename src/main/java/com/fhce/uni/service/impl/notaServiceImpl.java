@@ -263,12 +263,29 @@ public class notaServiceImpl implements notaService {
                 flujo.setEstado("PENDIENTE");
                 flujo.setFechaRecibido(null);
                 
-                this.flujoHojaRutaDao.save(flujo);
+                flujoHojaRutaModel flujoGuardado = this.flujoHojaRutaDao.save(flujo);
+                
+                crearNotificacionParaFlujo(flujoGuardado);
             }
 
         } catch (Exception e) {
             log.error("Error al generar flujo jerárquico", e);
             throw new RuntimeException("Error al generar flujo jerárquico: " + e.getMessage());
         }
+    }
+    private void crearNotificacionParaFlujo(flujoHojaRutaModel flujo) {
+        Long idSecretario = perteneceDao.findSecretarioByUnidadId(flujo.getId_unidad())
+            .orElseThrow(() -> new RuntimeException("No se encontró secretario para la unidad: " + flujo.getId_unidad()));
+        
+        notificacionModel notificacion = new notificacionModel();
+        notificacion.setId_usuario(idSecretario);
+        notificacion.setId_flujo_hoja_ruta(flujo.getId());
+        notificacion.setTipo("NUEVO_FLUJO");
+        notificacion.setMensaje("Tiene un nuevo paso en flujo de hoja de ruta - Orden: " + flujo.getOrden_aprobacion());
+        notificacion.setFecha_hora(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        notificacion.setLeido(false);
+        notificacion.setAccion_url("/flujos/" + flujo.getId());
+        
+        notificacionDao.save(notificacion);
     }
 }
