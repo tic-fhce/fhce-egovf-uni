@@ -84,6 +84,7 @@ public class notaServiceImpl implements notaService {
             nota.setFecha_creacion(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
             nota.setEstado("PENDIENTE");
             nota.setGestion(LocalDateTime.now().getYear());
+            nota.setId_tipo_nota(notaDtoRequest.getId_tipo_nota());
 
             notaModel notaGuardada = notaDao.save(nota);
             
@@ -183,8 +184,6 @@ public class notaServiceImpl implements notaService {
         }
     }
 
-    
-    
     private hojaRutaModel crearHojaRuta(notaModel nota) {
         hojaRutaModel hojaRuta = new hojaRutaModel();
         hojaRuta.setCite(nota.getCite());
@@ -260,6 +259,15 @@ public class notaServiceImpl implements notaService {
                 flujo.setId_hoja_ruta(hojaRuta.getId());
                 flujo.setOrden_aprobacion(orden++);
                 flujo.setId_unidad(unidad.getId());
+                
+                Long idAutoridad = perteneceDao.findAutoridadByUnidadId(unidad.getId())
+                        .orElseGet(() -> {
+                            return perteneceDao.findSecretarioByUnidadId(unidad.getId())
+                                .orElseThrow(() -> new RuntimeException(
+                                    "No se encontró autoridad ni secretario para la unidad: " + unidad.getUnidad()));
+                        });
+                flujo.setId_usuario(idAutoridad);
+                
                 flujo.setEstado("PENDIENTE");
                 flujo.setFechaRecibido(null);
                 
@@ -278,6 +286,7 @@ public class notaServiceImpl implements notaService {
             .orElseThrow(() -> new RuntimeException("No se encontró secretario para la unidad: " + flujo.getId_unidad()));
         
         notificacionModel notificacion = new notificacionModel();
+        notificacion.setId_usuario(flujo.getId_usuario());
         notificacion.setId_usuario(idSecretario);
         notificacion.setId_flujo_hoja_ruta(flujo.getId());
         notificacion.setTipo("NUEVO_FLUJO");
